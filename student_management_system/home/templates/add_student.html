@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Student</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        /* Navbar */
+
+        nav {
+            height: 65px;
+            background-color: #1e293b;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 40px;
+        }
+
+        nav h2 {
+            font-size: 21px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        /* Main Container */
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 40px auto;
+        }
+
+        .form-card {
+            background-color: white;
+            padding: 30px;
+
+            border-radius: 10px;
+
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        /* Django Form */
+
+        form p {
+            margin-bottom: 18px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 11px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+
+            font-size: 15px;
+        }
+
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        /* Buttons */
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .add-btn {
+            background-color: #2563eb;
+            color: white;
+
+            border: none;
+            padding: 11px 20px;
+
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .cancel-btn {
+            background-color: #64748b;
+            color: white;
+
+            padding: 11px 20px;
+
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .cancel-btn:hover {
+            background-color: #475569;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav>
+
+        <h2>🎓 Student Management</h2>
+
+        <div>
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'add_student' %}">
+                Add Student
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Form -->
+
+    <div class="container">
+
+        <div class="form-card">
+
+            <h1>Add Student</h1>
+
+            <p class="description">
+                Enter the student's information below.
+            </p>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+
+                <div class="buttons">
+
+                    <button type="submit" class="add-btn">
+                        Add Student
+                    </button>
+
+                    <a href="{% url 'dashboard' %}" class="cancel-btn">
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

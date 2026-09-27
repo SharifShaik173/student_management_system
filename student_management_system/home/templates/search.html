@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Search Students</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 30px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .search-box input {
+            width: 400px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            padding: 12px 20px;
+            border: none;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .search-box button:hover {
+            background: #0056b3;
+        }
+
+        .student {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .student h2 {
+            margin-top: 0;
+        }
+
+        .details {
+            margin: 5px 0;
+        }
+
+        .view-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .view-btn:hover {
+            background: #218838;
+        }
+
+        .no-result {
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Search Students</h1>
+
+        <form method="GET" class="search-box">
+
+            <input type="text" name="q" placeholder="Search student..." value="{{ query }}">
+
+            <button type="submit">Search</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="{% url 'dashboard' %}"><button type="button" style="padding: 15px;border-radius: 5px;">Back</button></a>
+        </form>
+
+
+        {% if query %}
+
+        {% if data %}
+
+        {% for i in data %}
+
+        <div class="student">
+
+            <h2>
+                {{ i.first_name }} {{ i.last_name }}
+            </h2>
+
+            <p class="details">
+                <strong>Phone:</strong> {{ i.phone }}
+            </p>
+
+            <p class="details">
+                <strong>Email:</strong> {{ i.email }}
+            </p>
+
+            <p class="details">
+                <strong>DOB:</strong> {{ i.dob }}
+            </p>
+
+            <a href="{% url 'student_details' i.id %}" class="view-btn">
+                View Details
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <p class="no-result">
+            No student found.
+        </p>
+
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
